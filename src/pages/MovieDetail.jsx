@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiPlay, FiBookmark } from "react-icons/fi";
 import { FaBookmark } from "react-icons/fa";
+
 import {
     getMovieDetails, 
     getMovieVideos, 
@@ -12,6 +13,8 @@ import {
 import { useWatchlist } from "../context/WatchlistContext";
 import VideoPlayer from "../components/VideoPlayer";
 import MovieRow from "../components/MovieRow";
+import MovieCompanion from "../components/MovieCompanion";
+
 
 const IMG = import.meta.env.VITE_IMG_BASE;
 
@@ -162,6 +165,7 @@ export default function MovieDetail() {
         <MovieRow title="Similar Movies" movies={similar} />
         </div>
     )}
+    {movie && <MovieCompanion movie={movie} />}
     </div>
 
     {showPlayer && videoKey && ( 
