@@ -4,6 +4,10 @@ import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
 import Search from "./pages/Search";
 import Watchlist from "./pages/Watchlist";
+import FreeMovies from "./pages/FreeMovies";
+import MoodPicker from "./pages/MoodPicker";
+import Stats from "./pages/Stats";
+
 
 export default function App() {
   return (
@@ -14,6 +18,9 @@ export default function App() {
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/search" element={<Search />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/free" element={<FreeMovies />} />
+        <Route path="/mood" element={<MoodPicker />} />
+        <Route path="/stats" element={<Stats />} />
       </Routes>
     </div>
   )

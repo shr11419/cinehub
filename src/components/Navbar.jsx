@@ -36,6 +36,13 @@ export default function Navbar() {
                 <FiBookmark size={20} />
                 <span>Watchlist</span>
                 </Link>
+                <Link to="/free" className="nav-link">🎬 Free Movies</Link>
+                <Link to="/mood" className="nav-link">🎭 Mood Pick</Link>
+                <Link to="/stats" className="nav-link">📊 My Stats</Link>
+                <Link to="/watchlist" className="nav-link">
+                    <FiBookmark size={20} />
+                    <span>Watchlist</span>
+                </Link>
             </div>
         </nav>
     )

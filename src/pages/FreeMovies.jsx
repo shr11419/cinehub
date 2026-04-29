@@ -9,13 +9,19 @@ export default function FreeMovies() {
     const [playing, setPlaying] = useState(null);
 
     useEffect(() => {
+    async function fetchMovies() {
         setLoading(true);
-        getFreeMovies(page).then(({ movies: m }) => { // ✅ Bug 7
-            if (page === 1) setMovies(m);
-            else setMovies(prev => [...prev, ...m]);
-            setLoading(false);
-        });
-    }, [page]);
+
+        const { movies: m } = await getFreeMovies(page);
+
+        if (page === 1) setMovies(m);
+        else setMovies(prev => [...prev, ...m]);
+
+        setLoading(false);
+    }
+
+    fetchMovies();
+}, [page]);
 
     return (
         <div className="free-page">

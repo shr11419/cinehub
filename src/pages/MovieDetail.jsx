@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiPlay, FiBookmark } from "react-icons/fi";
 import { FaBookmark } from "react-icons/fa";
+import { useStats } from "../context/StatsContext";
 
 import {
     getMovieDetails, 
@@ -29,6 +30,7 @@ export default function MovieDetail() {
     const [similar, setSimilar] = useState([]);
     const [showPlayer, setShowPlayer] = useState(false);
     const [loading, setLoading] = useState(true);
+    const { logWatch } = useStats();
 
    useEffect(() => {
     window.scrollTo(0, 0);
@@ -118,7 +120,9 @@ export default function MovieDetail() {
 
                 <div className="detail-actions"> 
                     {videoKey ? (
-                    <button className="play-btn" onClick={() => setShowPlayer(true)}
+                    <button className="play-btn" onClick={() => { setShowPlayer(true); 
+                        logWatch(movie);
+                    }}
                 >  <FiPlay fill="white" size={18} /> Play Trailer
                 </button> 
                 ) : ( 
