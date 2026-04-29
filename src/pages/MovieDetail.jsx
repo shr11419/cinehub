@@ -84,7 +84,7 @@ export default function MovieDetail() {
                 <div className="detail-backdrop" 
                 style={{ backgroundImage: `url(${backdrop})`}}
             >
-                <div className="detail-backdrop-overlap" />
+                <div className="detail-backdrop-overlay" />
                 </div>
             )}
 

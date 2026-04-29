@@ -1,13 +1,13 @@
 import {useState, useEffect } from "react";
-import { useNavigation} from "react-router-dom";
-import { FiPlay, FiInfo } from "react-icon/fi";
+import { useNavigate} from "react-router-dom";
+import { FiPlay, FiInfo } from "react-icons/fi";
 import { getTrending } from "../api/tmdb";
 
 const IMG = import.meta.env.VITE_IMG_BASE;
 
 export default function Hero() {
     const [movie, setMovie ] = useState(null);
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getTrending().then(res => {
@@ -24,37 +24,27 @@ export default function Hero() {
     const rating = movie.vote_average?.toFixed(1);
 
     return (
-        <div classname="hero" 
+        <div className="hero" 
         style={{backgroundImage: `url(${backdrop})`}}
     >
 
         <div className="hero-overlay"/>
         <div className="hero-content">
-            <span className="hero-badge"> ⭐ {rating}</span>
-            <span className="hero-badge">{year}</span>
-        </div>
-
-        <h1 className="hero-title">{movie.title}</h1>
-
-        <p className="hero-overview">
-            {movie.overview?.slice(0,180)}...
-        </p>
-
-        <div className="hero-action"> 
-            <button 
-            className="hero-play-btn" 
-            onClick={() => navigate(`/movie/${movie.id}`)}
-            >
-                <FiPlay fill="white" size={18} /> 
-                Play Trailer
-            </button>
-            <button className="hero-info-btn" 
-            onClick={() => navigate(`/movie/${movie.id}`)}> 
-        <FiInfo size={18} /> 
-        More Info 
+    <div className="hero-badges">
+        <span className="hero-badge">⭐ {rating}</span>
+        <span className="hero-badge">{year}</span>
+    </div>
+    <h1 className="hero-title">{movie.title}</h1>
+    <p className="hero-overview">{movie.overview?.slice(0,180)}...</p>
+    <div className="hero-actions">   {/* Bug 6 — was hero-action not hero-actions */}
+        <button className="hero-play-btn" onClick={() => navigate(`/movie/${movie.id}`)}>
+            <FiPlay fill="white" size={18} /> Play Trailer
         </button>
-        </div>
-
-        </div>
+        <button className="hero-info-btn" onClick={() => navigate(`/movie/${movie.id}`)}>
+            <FiInfo size={18} /> More Info
+        </button>
+    </div>
+</div>
+</div>
     )
 }

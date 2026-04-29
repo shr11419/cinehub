@@ -3,7 +3,7 @@ import axios from "axios";
 const api = axios.create({
     baseURL: import.meta.env.VITE_TMDB_BASE,
     params: {
-        api_key: import.meta.env.VITE_TMDB_BASE,
+        api_key: import.meta.env.VITE_TMDB_KEY,
         language: "en-US",
     },
 });
@@ -18,7 +18,7 @@ export const searchMovies = (query, page = 1) =>
      api.get('/search/movie', {params: {query, page}});
 
 export const getMovieDetails = (id) => 
-    api.get(`/movie/${id}0`);
+    api.get(`/movie/${id}`);
 
 export const getMovieVideos = (id) => 
     api.get(`/movie/${id}/videos`);

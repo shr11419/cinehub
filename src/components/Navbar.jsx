@@ -27,7 +27,7 @@ export default function Navbar() {
                 placeholder="Search movies.."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                classNmae="nav-search-input"
+                className="nav-search-input"
                 />
             </form>
 

@@ -7,15 +7,15 @@ export default function MovieRow({title, movies }) {
 
     function scroll(dir) {
       rowRef.current.scrollBy({
-        left: dir === "left" ? -600 : 600,
+        left: dir === "left" ? -600 : 600,  behavior: "smooth" 
       });
     }
 
     return (
         <div className="movie-row">
-            <h2 classname="row-title">{title}</h2>
+            <h2 className="row-title">{title}</h2>
 
-            <div className="row-weapper"> 
+            <div className="row-wrapper"> 
                 <button className="row-arrow left" onClick={() => scroll("left")}>
                     <FiChevronLeft size={22} />
                 </button>

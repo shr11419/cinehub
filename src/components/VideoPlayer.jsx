@@ -8,9 +8,9 @@ export default function VideoPlayer({videoKey, onClose}) {
         <button className="player-close" onClick={onClose}> 
            <FiX size={24} />
         </button>
-        <iframe className="player-iframe" src={`https://www/youtube.com/embed/${videoKey}?autoplay=1&rel=0`}
+        <iframe className="player-iframe" src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&rel=0`}
         title="Movie Trailer" 
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipoard-write;
                encrypted-media; gyroscope; picture-in-picture"
                allowFullScreen

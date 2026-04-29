@@ -5,14 +5,12 @@ import {
     getTrending, 
     getTopRated,
     getNowPlaying, 
-    getPopular,
 } from "../api/tmdb";
 
 export default function Home() {
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [nowPlaying, setNowPlaying] = useState([]);
-    const [popular, setPopular] = useState([]);
 
     //fetching all rows in parallel using promise.all
     useEffect(() => {
@@ -20,12 +18,10 @@ export default function Home() {
             getTrending(), 
             getTopRated(),
             getNowPlaying(), 
-            getPopular(),
-        ]).then(([t, tr, np, p]) => {
+        ]).then(([t, tr, np]) => {
             setTrending(t.data.results);
             setTopRated(tr.data.results);
             setNowPlaying(np.data.results);
-            setPopular(p.data.results);
         });
     }, []);
 
@@ -36,7 +32,6 @@ export default function Home() {
         <MovieRow title="🔥 Trending This Week" movies={trending} />
         <MovieRow title="🎬 Now Playing" movies={nowPlaying} />
         <MovieRow title="⭐ Top Rated" movies={topRated} />
-        <MovieRow title="🍿 Popular" movies={popular} />
         </div>
         </div>
     );
