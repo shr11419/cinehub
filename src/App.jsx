@@ -7,11 +7,12 @@ import Watchlist from "./pages/Watchlist";
 import FreeMovies from "./pages/FreeMovies";
 import MoodPicker from "./pages/MoodPicker";
 import Stats from "./pages/Stats";
+import WatchTogether from "./pages/WatchTogether";
 
 
 export default function App() {
   return (
-    <div classname="app">
+    <div className="app">
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/free" element={<FreeMovies />} />
         <Route path="/mood" element={<MoodPicker />} />
         <Route path="/stats" element={<Stats />} />
+        <Route path="/watch/:roomCode" element={<WatchTogether />} />
       </Routes>
     </div>
   )

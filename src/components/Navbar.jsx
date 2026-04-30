@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FiSearch, FiBookmark, FiFilm } from "react-icons/fi";
+import JoinRoomModal from "./JoinRoomModal";
 
 export default function Navbar() {
     const [query, setQuery ] = useState("");
+    const [showJoin, setShowJoin] = useState(false);
     const navigate = useNavigate();
 
     function handleSearch(e) {
@@ -36,13 +38,13 @@ export default function Navbar() {
                 <FiBookmark size={20} />
                 <span>Watchlist</span>
                 </Link>
-                <Link to="/free" className="nav-link">🎬 Free Movies</Link>
-                <Link to="/mood" className="nav-link">🎭 Mood Pick</Link>
-                <Link to="/stats" className="nav-link">📊 My Stats</Link>
-                <Link to="/watchlist" className="nav-link">
-                    <FiBookmark size={20} />
-                    <span>Watchlist</span>
-                </Link>
+                <Link to="/free" className="nav-link"> Free Movies</Link>
+                <Link to="/mood" className="nav-link"> Mood Pick</Link>
+                <Link to="/stats" className="nav-link">My Stats</Link>
+                <button className="nav-join-btn" onClick={() => setShowJoin(true)}>
+                 Join Room
+                </button>
+                {showJoin && <JoinRoomModal onClose={() => setShowJoin(false)} />}
             </div>
         </nav>
     )

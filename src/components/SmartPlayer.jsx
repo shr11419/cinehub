@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FiX, FiLoader } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { findMovieOnArchive, getArchiveEmbedUrl } from "../api/archive";
 
 export default function SmartPlayer({movie, videoKey,onClose }) {

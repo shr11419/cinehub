@@ -11,7 +11,7 @@ export async function searchArchive(title) {
 }
 
 export function getArchiveEmbedUrl(identifier) {
-    return `&{ARCHIVE_BASE}/embed/${identifier}`;
+    return `${ARCHIVE_BASE}/embed/${identifier}`;
 }
 
 export function getArchiveThumbnail(identifier) {

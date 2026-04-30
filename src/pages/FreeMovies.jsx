@@ -26,7 +26,7 @@ export default function FreeMovies() {
     return (
         <div className="free-page">
             <div className="free-page-header">
-                <h1 className="free-page-title">🎬 Free Movies</h1>
+                <h1 className="free-page-title"> Free Movies</h1>
                 <p className="free-page-sub">
                     Full movies, completely free and legal — public domain classics
                 </p>
@@ -80,7 +80,7 @@ export default function FreeMovies() {
                         <div className="player-header">
                             <div className="player-header-left">
                                 <span className="player-movie-title">{playing.title}</span>
-                                <span className="source-badge free">🎬 Full Movie — Free</span>
+                                <span className="source-badge free"> Full Movie — Free</span>
                             </div>
                             <button className="player-close-btn" onClick={() => setPlaying(null)}>
                                 ✕

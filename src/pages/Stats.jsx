@@ -94,7 +94,7 @@ End with a fun movie lover title like "The Psychological Thriller Connoisseur".`
 
     return ( 
         <div className="stats-page">
-            <h1 className="stats-title">📊 Your Watch Stats </h1>
+            <h1 className="stats-title"> Your Watch Stats </h1>
 
             <div className="stats-cards">
                 <div className="stat-card">
@@ -106,7 +106,7 @@ End with a fun movie lover title like "The Psychological Thriller Connoisseur".`
                     <p className="stat-label">Total Watch Time</p>
                 </div>
                 <div className="stat-card">
-                    <p className="stat-number">⭐ {avgRating}</p>
+                    <p className="stat-number"> {avgRating}</p>
                     <p className="stat-label">Avg Rating</p>
                 </div>
                 <div className="stat-card">
@@ -164,7 +164,7 @@ End with a fun movie lover title like "The Psychological Thriller Connoisseur".`
             </div>
 
             <div className="profile-box">
-                <h3 className="chart-title">🤖 Your Movie Personality</h3>
+                <h3 className="chart-title"> Your Movie Personality</h3>
                 {aiProfile ? ( 
                     <p className="ai-profile-text">{aiProfile}</p>
                 ) : ( 

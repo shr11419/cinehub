@@ -124,7 +124,7 @@ Respond ONLY with valid JSON, no markdown, no explanation:
                   />
                   <div className="mood-card-info">
                     <p className="mood-card-title">{movie.title}</p>
-                    <p className="mood-card-rating">⭐ {movie.vote_average?.toFixed(1)}</p>
+                    <p className="mood-card-rating"> {movie.vote_average?.toFixed(1)}</p>
                   </div>
                   </div>
                         ))}

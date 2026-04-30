@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="hero-overlay"/>
         <div className="hero-content">
     <div className="hero-badges">
-        <span className="hero-badge">⭐ {rating}</span>
+        <span className="hero-badge"> {rating}</span>
         <span className="hero-badge">{year}</span>
     </div>
     <h1 className="hero-title">{movie.title}</h1>
