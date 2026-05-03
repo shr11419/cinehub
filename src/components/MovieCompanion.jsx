@@ -26,45 +26,23 @@ export default function MovieCompanion({movie}) {
         setLoading(true);
 
         try {
-            const history = messages.map(m => ({ 
-                role: m.role === "assistant" ? "model" : "user",
-                parts: [{ text: m.content }]
-            }));
-
-            const res = await fetch(
-               `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_KEY}`,
-               {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({
-                    system_instruction: {
-                        parts: [{
-                            text:`You are an expert movie companion AI for the film:
-
-Title: ${movie.title}
-Year: ${movie.release_date?.slice(0, 4)}
-Rating: ${movie.vote_average}/10
-Overview: ${movie.overview}
-Genres: ${movie.genres?.map(g => g.name).join(", ")}
-Runtime: ${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m
-
-Answer questions specifically about this movie.
-Keep answers concise — max 3 sentences.
-Be conversational and enthusiastic about cinema.
-If asked about spoilers, warn first.`
-                        }]
-                    },
-                    contents: [
-                        ...history,
-                        {role: "user" , parts: [{ text: userText }]}
-                    ],
-                    generationConfig: { maxOutputTokens: 200, temperature: 0.7 }
-                })
-               } 
-            );
+        const res = await fetch("http://localhost:3001/api/chat", {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({
+  messages: [...messages, { role: "user", content: userText }],
+  movieContext: {
+    title: movie.title,
+    year: movie.release_date?.slice(0, 4),
+    rating: movie.vote_average,
+    overview: movie.overview,
+    genres: movie.genres?.map(g => g.name).join(", ")
+  }
+})
+     });
 
             const data = await res.json();
-            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't answer that!";
+            const reply = data.reply; 
 
             setMessages(prev => [...prev, {role: "assistant", content: reply }]);
         } catch {

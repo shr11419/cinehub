@@ -21,7 +21,7 @@ export default function MovieRow({title, movies }) {
                 </button>
 
                 <div className="row-cards" ref={rowRef}>
-                    {movies.map(movie => ( 
+                    {movies && movies.map(movie => ( 
                         <MovieCard key={movie.id} movie={movie} />
                     ))}
                 </div>

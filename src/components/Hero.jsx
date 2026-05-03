@@ -12,7 +12,7 @@ export default function Hero() {
     useEffect(() => {
         getTrending().then(res => {
             const results = res.data.results;
-            const random = results[Math.floor(Math.random() * 10)];
+            const random = results?.[Math.floor(Math.random() * results.length)];
             setMovie(random);
         });
     }, []);
