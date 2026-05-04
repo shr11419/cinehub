@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchMovies } from "../api/tmdb";
 
+const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
+
 const moods = [
   { emoji: "😢", label: "Feeling Sad", prompt: "deeply emotional and healing movies that make you feel understood and hopeful" },
   { emoji: "😂", label: "Want to Laugh", prompt: "hilarious comedy movies that will make you laugh out loud" },
@@ -29,10 +32,13 @@ export default function MoodPicker() {
         try {
             //ask gemini to pick 5 movie title for that mood
             const res = await fetch( 
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_KEY}`,
+                GEMINI_URL,
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json"}, 
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-goog-api-key": import.meta.env.VITE_GEMINI_KEY
+                    },
                     body: JSON.stringify({ 
                         contents: [{
                             parts: [{
@@ -62,9 +68,11 @@ Respond ONLY with valid JSON, no markdown, no explanation:
             //search TMDB for each movie title
             const movieResults = await Promise.all( 
                 parsed.movies.map(title => 
-                    searchMovies(title, 1).then(r => r.data.results[0].catch(() => null)
+                    searchMovies(title, 1)
+                        .then(r => r.data.results[0] || null)
+                        .catch(() => null)
                 )
-            ));
+            );
               setMovies(movieResults.filter(Boolean));  
             
         }  catch(err) {

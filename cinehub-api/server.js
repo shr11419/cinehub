@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -32,19 +35,29 @@ app.post("/api/chat", async (req, res) => {
          Help with recommendations, watchlists, and movie questions.
          Keep answers under 3 sentences. Be friendly and use emojis.`;
 
+    const contents = [
+      {
+        role: "user",
+        parts: [{
+          text: `System instructions:\n${systemText}`
+        }]
+      },
+      ...messages.map(m => ({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }]
+      }))
+    ];
+
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_KEY}`,
+      `${GEMINI_API_BASE}/models/${GEMINI_MODEL}:generateContent`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": process.env.GEMINI_KEY
+        },
         body: JSON.stringify({
-          system_instruction: {
-            parts: [{ text: systemText }]
-          },
-          contents: messages.map(m => ({
-            role: m.role === "assistant" ? "model" : "user",
-            parts: [{ text: m.content }]
-          })),
+          contents,
           generationConfig: {
             maxOutputTokens: 300,
             temperature: 0.7
@@ -75,10 +88,13 @@ app.post("/api/mood", async (req, res) => {
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_KEY}`,
+      `${GEMINI_API_BASE}/models/${GEMINI_MODEL}:generateContent`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": process.env.GEMINI_KEY
+        },
         body: JSON.stringify({
           contents: [{
             parts: [{

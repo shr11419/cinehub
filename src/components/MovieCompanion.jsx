@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import {FiMessageCircle, FiX, FiSend } from "react-icons/fi";
 
+const API_BASE = import.meta.env.VITE_API_BASE || "";
+
 export default function MovieCompanion({movie}) {
     const [open, setOpen ] = useState(false);
     const [messages, setMessages] = useState([
@@ -26,7 +28,7 @@ export default function MovieCompanion({movie}) {
         setLoading(true);
 
         try {
-        const res = await fetch("http://localhost:3001/api/chat", {
+        const res = await fetch(`${API_BASE}/api/chat`, {
            method: "POST",
            headers: { "Content-Type": "application/json" },
            body: JSON.stringify({

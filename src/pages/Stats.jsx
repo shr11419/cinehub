@@ -4,6 +4,8 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis
 import { Link } from "react-router-dom";
 
 const IMG = import.meta.env.VITE_IMG_BASE;
+const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
 
 const COLORS = ["#e50914", "#f5c518", "#00d2ff", "#7fff00", "#ff69b4", "#ffa500", "#9370db", "#20b2aa"];
 
@@ -58,10 +60,13 @@ export default function Stats() {
 
         try {
            const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_KEY}`,
+        GEMINI_URL,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": import.meta.env.VITE_GEMINI_KEY
+          },
           body: JSON.stringify({
             contents: [{
               parts: [{
