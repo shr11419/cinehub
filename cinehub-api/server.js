@@ -15,7 +15,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.post("/api/chat", async (req, res) => {
+app.post("cinehub-production-a603.up.railway.app/api/chat", async (req, res) => {
   const { messages, movieContext } = req.body;
 
   if (!messages || !Array.isArray(messages)) {
