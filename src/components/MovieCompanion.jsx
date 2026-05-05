@@ -28,7 +28,7 @@ export default function MovieCompanion({movie}) {
         setLoading(true);
 
         try {
-        const res = await fetch(`${API_BASE}/api/chat`, {
+        const res = await fetch(`https://cinehub-app-production.up.railway.app/api/chat`, {
            method: "POST",
            headers: { "Content-Type": "application/json" },
            body: JSON.stringify({
